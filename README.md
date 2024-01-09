@@ -1,2 +1,24 @@
 # random_quote_generator
 Qualifio recruitment task
+
+## Available Scripts
+
+In the project root directory, you can run the following scripts:
+
+### `npm run start`
+
+Runs the app locally in the development mode.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+Or run start:backend or start:frontend to run separate.
+
+### `npm run test`
+
+Launches test on all packages simultaneously.
+
+### `npm run docker:build`
+
+Runs both Dockerfiles for both frontend and backend folder and builds them.
+
+### `npm run docker:start`
+
+Runs both Docker images. Open [http://localhost:8080](http://localhost:8080) to view it in the browser.

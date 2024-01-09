@@ -1,4 +1,3 @@
-// src/routes/quotes.ts
 import { Router, Request, Response } from 'express';
 import { apiKey } from '../config/config';
 const quotesRouter = Router();

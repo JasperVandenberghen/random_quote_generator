@@ -7,7 +7,7 @@ In the project root directory, you can run the following scripts:
 
 ### `npm run start`
 
-Runs the app locally in the development mode.
+Builds and runs both the frontend and backend locally in the development mode.
 Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 Or run start:backend or start:frontend to run separate.
 

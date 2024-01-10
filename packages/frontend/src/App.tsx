@@ -29,8 +29,8 @@ function App() {
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
 
-    const response = await fetch(`http://localhost:3000/api/quotes/random?${queryString}`);
-    const json = await response.json();
+    const response = await fetch(`http://localhost:3000/api/quotes/random${queryString ? `?${queryString}` : ''}`);
+    const json = await response.json(); 
 
     if (Array.isArray(json)) {
       setQuotes(json.map((quote) => quote.content));

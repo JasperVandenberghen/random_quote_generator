@@ -21,4 +21,4 @@ Runs both Dockerfiles for both frontend and backend folder and builds them.
 
 ### `npm run docker:start`
 
-Runs both Docker images. Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+Runs both Docker images (make sure you have your Docker engine (Docker Desktop) running before starting). Open [http://localhost:8080](http://localhost:8080) to view it in the browser.

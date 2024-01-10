@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node --no-warnings dist/server.js --max_old_space_size=2560",
+    "start": "npm run build && node --no-warnings dist/server.js",
     "build": "tsc",
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000"
   },

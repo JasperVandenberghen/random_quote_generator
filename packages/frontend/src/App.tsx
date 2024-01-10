@@ -5,6 +5,7 @@ import QuoteForm from './Form';
 import QuoteList from './QuotesList';
 
 function App() {
+  // State variables using the useState hook
   const [buttonClicked, setButtonClicked] = useState(false);
   const [quotes, setQuotes] = useState<string[]>([]);
   const [queryParams, setQueryParams] = useState({
@@ -15,8 +16,10 @@ function App() {
     author: '',
   });
 
+  // Event handler for input changes in the form
   const handleChange = (e: any) => {
     const { name, value } = e.target;
+    // Updating state based on the changed input
     setQueryParams((prevParams) => ({
       ...prevParams,
       [name]: value,
@@ -29,9 +32,11 @@ function App() {
       .map(([key, value]) => `${key}=${value}`)
       .join('&');
 
+    // Fetching data from the server API
     const response = await fetch(`http://localhost:3000/api/quotes/random${queryString ? `?${queryString}` : ''}`);
     const json = await response.json(); 
 
+    // Handling the response and updating state
     if (Array.isArray(json)) {
       setQuotes(json.map((quote) => quote.content));
     } else {

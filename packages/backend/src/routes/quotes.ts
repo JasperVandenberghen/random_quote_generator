@@ -12,6 +12,7 @@ quotesRouter.get('/random', async (req: Request, res: Response) => {
   
       const queryParams = new URLSearchParams();
 
+       // Setting optional query parameters if provided in the reques
       if (req.query.limit !== undefined) {
         queryParams.set('limit', req.query.limit.toString());
       }

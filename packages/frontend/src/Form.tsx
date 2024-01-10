@@ -11,9 +11,12 @@ interface QuoteFormProps {
 }
 
 const QuoteForm: React.FC<QuoteFormProps> = ({ queryParams, handleChange, getQuote }) => {
+
+  // Event handler for input changes with additional validation
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    // Additional validation for specific input fields
     if (name === 'limit') {
       if (!/^\d+$/.test(value) || +value <= 0) {
         console.error('Limit must be a positive integer');

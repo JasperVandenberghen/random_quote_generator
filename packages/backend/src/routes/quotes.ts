@@ -10,20 +10,41 @@ quotesRouter.get('/random', async (req: Request, res: Response) => {
         throw new Error('API key is missing');
       }
   
-      const limit = req.query.limit ?? 1;
-  
-      const response = await fetch(`https://api.quotable.io/quotes/random${limit ? `?limit=${limit}` : ''}`, {
+      const queryParams = new URLSearchParams();
+
+      if (req.query.limit !== undefined) {
+        queryParams.set('limit', req.query.limit.toString());
+      }
+
+      if (req.query.minLength !== undefined) {
+        queryParams.set('minLength', req.query.minLength.toString());
+      }
+
+      if (req.query.maxLength !== undefined) {
+        queryParams.set('maxLength', req.query.maxLength.toString());
+      }
+
+      if (req.query.tags !== undefined) {
+        queryParams.set('tags', req.query.tags.toString());
+      }
+
+      if (req.query.author !== undefined) {
+        queryParams.set('author', req.query.author.toString());
+      }
+
+      const apiUrl = `https://api.quotable.io/quotes/random${queryParams.toString() !== '' ? `?${queryParams.toString()}` : ''}`;
+
+      const response = await fetch(apiUrl, {
         headers: {
           'Bearer': apiKey,
         },
       });
-  
+    
       if (!response.ok) {
         throw new Error(`Failed to fetch quote. Status: ${response.status}`);
       }
   
       const quote = await response.json();
-  
       res.json(quote)
     } catch (error) {
       console.error('Error fetching quote:', error);

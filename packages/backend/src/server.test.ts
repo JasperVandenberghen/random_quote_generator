@@ -40,6 +40,41 @@ describe('Server', () => {
     expect(quoteData.authorSlug).toBeDefined();
   });
 
+  it('should handle limit query parameter', async () => {
+    const response = await request(app).get('/api/quotes/random?limit=5');
+  
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(5);
+  });
+
+  it('should handle minLength query parameter', async () => {
+    const response = await request(app).get('/api/quotes/random?minLength=10');
+    const quoteData = response.body[0];
+    expect(response.status).toBe(200);
+    expect(quoteData.content.length).toBeGreaterThanOrEqual(10);
+    expect(quoteData.content.length).not.toBeLessThan(10);
+  });
+  
+  it('should handle maxLength query parameter', async () => {
+    const response = await request(app).get('/api/quotes/random?maxLength=50');
+    const quoteData = response.body[0];
+    expect(response.status).toBe(200);
+    expect(quoteData.content.length).toBeLessThanOrEqual(50);
+  });
+  
+  it('should handle tags query parameter', async () => {
+    const response = await request(app).get('/api/quotes/random?tags=business');
+    const quoteData = response.body[0];
+    expect(response.status).toBe(200);
+    expect(quoteData.tags).toContain("Business")
+  });
+  
+  it('should handle author query parameter', async () => {
+    const response = await request(app).get('/api/quotes/random?author=Jack Welch');
+    const quoteData = response.body[0];
+    expect(response.status).toBe(200);
+    expect(quoteData.author).toEqual("Jack Welch")
+  });
 
   it('should respond with status 200 and valid JSON data for GET request to /api/quotes/random', async () => {
     const mockQuoteData = {
@@ -60,13 +95,10 @@ describe('Server', () => {
     expect(response.body).toEqual(mockQuoteData);
   });
 
-
- 
   it('should respond with 500 if fetch failed', async () => {
     global.fetch = jest.fn().mockRejectedValueOnce(new Error('Fetch failed'));
 
     const response = await request(app).get('/api/quotes/random');
-    console.log(response.error);
     expect(response.status).toBe(500);
     expect(response.serverError).toBe(true);
   });
